@@ -1,0 +1,35 @@
+from datetime import datetime
+
+# Simulated packet class
+class Packet:
+    def __init__(self, ip_src, ip_dst, protocol, sport=None, dport=None, payload=""):
+        self.ip_src = ip_src
+        self.ip_dst = ip_dst
+        self.protocol = protocol
+        self.sport = sport
+        self.dport = dport
+        self.payload = payload
+
+def analyze_packet(packet):
+    print("=" * 60)
+    print("Time:", datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+    print(f"IP: {packet.ip_src} → {packet.ip_dst}")
+    print(f"{packet.protocol}: {packet.sport} → {packet.dport}")
+    preview = packet.payload[:50]
+    print("Payload:", preview)
+
+def main():
+    print("Simulating packet capture...\n")
+    
+    # Example simulated packets
+    packets = [
+        Packet("192.168.1.2", "8.8.8.8", "TCP", 12345, 80, "GET / HTTP/1.1\r\nHost: example.com"),
+        Packet("10.0.0.5", "10.0.0.1", "UDP", 54321, 53, "DNS Query for google.com"),
+        Packet("172.16.0.2", "172.16.0.1", "TCP", 4444, 22, "SSH Connection Initiation"),
+    ]
+    
+    for pkt in packets:
+        analyze_packet(pkt)
+
+if __name__ == "__main__":
+    main()
